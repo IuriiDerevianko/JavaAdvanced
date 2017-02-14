@@ -1,0 +1,4 @@
+handlers = java.util.logging.FileHandler
+java.util.logging.FileHandler.level     = WARNING
+java.util.logging.FileHandler.append    = false
+java.util.logging.FileHandler.pattern   = log.%u.%g.txt
