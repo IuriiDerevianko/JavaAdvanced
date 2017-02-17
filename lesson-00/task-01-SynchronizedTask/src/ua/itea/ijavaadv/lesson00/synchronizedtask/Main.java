@@ -1,4 +1,4 @@
-//I
+//D
 package ua.itea.ijavaadv.lesson00.synchronizedtask;
 public class Main {
 
