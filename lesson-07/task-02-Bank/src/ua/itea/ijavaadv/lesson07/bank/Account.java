@@ -13,11 +13,11 @@ public class Account {
         return person;
     }
 
-    public synchronized long getBalance() {
+    public long getBalance() {
         return balance;
     }
 
-    public synchronized void setBalance(long balance) {
+    public void setBalance(long balance) {
         delay(); // simulate extensive work :)
         this.balance = balance;
     }

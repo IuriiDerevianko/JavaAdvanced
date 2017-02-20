@@ -30,30 +30,34 @@ public class Bank {
         return sum;
     }
 
-    public synchronized void execute(Transaction transaction) {
-        Lock myFirstLock = new ReentrantLock();
-        switch (transaction.getType()) {
-            case TRANSFER:
-                long srcBal = transaction.getSource().getBalance();
-                srcBal -= transaction.getAmount();
-                transaction.getSource().setBalance(srcBal);
-                long destBal = transaction.getDestination().getBalance();
-                destBal += transaction.getAmount();
-                transaction.getDestination().setBalance(destBal);
-                break;
-            case CASH_REPLENISHMENT:
-                try {
-                    myFirstLock.lock();
+
+    private Lock accessLock = new ReentrantLock();
+    public void execute(Transaction transaction) {
+        try {
+            accessLock.lock();
+            switch (transaction.getType()) {
+                case TRANSFER:
+                    long srcBal = transaction.getSource().getBalance();
+                    srcBal -= transaction.getAmount();
+                    transaction.getSource().setBalance(srcBal);
+                    long destBal = transaction.getDestination().getBalance();
+                    destBal += transaction.getAmount();
+                    transaction.getDestination().setBalance(destBal);
+                    break;
+                case CASH_REPLENISHMENT:
                     long balance = transaction.getSource().getBalance();
                     balance += transaction.getAmount();
                     transaction.getSource().setBalance(balance);
-                } finally{
-                    myFirstLock.unlock();
-                }
+                    break;
+                case CASH_WITHDRAWAL:
+                    long otherBalance = transaction.getSource().getBalance();
+                    otherBalance -= transaction.getAmount();
+                    transaction.getSource().setBalance(otherBalance);
+                    /* NOT IMPLEMENTED YET */
                 break;
-            case CASH_WITHDRAWAL:
-                /* NOT IMPLEMENTED YET */
-            break;
+            }
+        } finally{
+            accessLock.unlock();
         }
     }
 }

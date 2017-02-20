@@ -25,11 +25,11 @@ public class Transaction {
         return type;
     }
 
-    public synchronized long getAmount() {
+    public long getAmount() {
         return amount;
     }
 
-    public synchronized Account getSource() {
+    public Account getSource() {
         return source;
     }
 
