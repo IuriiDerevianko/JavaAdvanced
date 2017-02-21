@@ -1,4 +1,4 @@
-//I
+//D
 package ua.itea.ijavaadv.lesson07.moneylifedemo;
 
 import ua.itea.ijavaadv.lesson07.bank.Bank;
