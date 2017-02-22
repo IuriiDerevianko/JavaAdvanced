@@ -10,7 +10,14 @@ import java.util.List;
  * at 14:19
  * on 06.02.17
  * by Iurii Derevianko;
+ *
+ *
+ * 3.pro/generics/wild-department. Следуя DRY разработать Department на основе Array, содержащий информацию о сотрудниках.
+ * Employee extends Person; Дополнить Department свойством String name и методом double averageAge() и boolean
+ * hasSameAverageAge(..., double epsilon) принимающий другой департамент. Использовать Wildcard.
+ *
  */
+
 public class Main {
     public static void main(String[] args) {
 

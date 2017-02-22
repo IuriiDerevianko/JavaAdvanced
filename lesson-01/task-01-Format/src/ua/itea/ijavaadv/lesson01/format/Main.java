@@ -20,7 +20,7 @@ import java.util.Locale;
  *
  *  2. Format. Дополнить класс Person реализацией ин-фейса Formattable для вывода через %s;
  *
- * [3. Format. При форматировании учитывать FormattableFlags
+ * [3. Format. При форматировании учитывать FormattableFlags;
  *
  */
 

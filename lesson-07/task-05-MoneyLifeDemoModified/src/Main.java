@@ -1,4 +1,4 @@
-//I
+//D
 import ua.itea.ijavaadv.lesson07.bank.Bank;
 
 import java.util.concurrent.locks.Condition;
@@ -29,7 +29,7 @@ public class Main {
 
         for (int i = 0; i < 5; i++) {
             new Thread(new Withdrawal(myLock, moneyAvailable, bank, 5_000)).start();
-            Thread.sleep(1500);
+            Thread.sleep(500);
 
             new Thread(new Replenishment(myLock, moneyAvailable, bank, 10_000)).start();
             Thread.sleep(500);

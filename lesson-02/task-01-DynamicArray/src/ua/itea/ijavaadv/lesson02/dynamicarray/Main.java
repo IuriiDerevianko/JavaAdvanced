@@ -5,6 +5,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ *
+ * 1.pro/generics/dynamic-array. Дано: generic array T[] and T element. Написать статический метод для подсчета количества
+ * элементов в массиве меньших чем данный элемент. Будет ли тип T типом возвращаемого значения метода?
+ *
+ * 2.pro/generics/dynamic-array. Дополнить Array. Написать метод, который принимает коллекцию чисел, возвращает
+ * отсортированный список чисел из каждого элемента которого вычли число, соответствующее среднему арифметическому
+ * младших 16 разрядов элементов исходной collection. Соблюдать контроль типов на этапе компиляции. Исходная коллекция
+ * должна состоять только из сравниваемых элементов типа: AtomicInteger, AtomicLong, BigDecimal, BigInteger, Byte, Double,
+ * DoubleAccumulator, DoubleAdder,Float, Integer, Long, LongAccumulator, LongAdder, Short или наследника какого-либо
+ * вышеперечисленных классов.
+ *
+ */
+
 public class Main {
     public static void main(String[] args) {
         //1.

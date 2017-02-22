@@ -7,7 +7,7 @@ package ua.itea.ijavaadv.lesson02.numarray;
  * on 06.02.17
  * by Iurii Derevianko;
  *
- * На основе предыдущей версии Array разработать NumArray. Предоставить возможность сериализации и десериализации
+ * 4. pro/generics/num-array. На основе предыдущей версии Array разработать NumArray. Предоставить возможность сериализации и десериализации
  * динамического массива состоящего в частности из элементов LazyBigInteger (extends java.math.BigInteger)
  * который в качестве элементов содержит java.util.function.LongSupplier(Not Serializable).
  * Вывести на экран List<LazyBigInteger> десериализированный из потока байт,

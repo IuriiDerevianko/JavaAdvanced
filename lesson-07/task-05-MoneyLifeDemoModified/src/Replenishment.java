@@ -15,6 +15,7 @@ public class Replenishment implements Runnable{
     private Condition moneyAvailable;
     private Bank bank;
     private int amount;
+    private int isFull = 25_000;
 
     public Replenishment(Lock myLock, Condition moneyAvailable, Bank bank, int amount){
         this.myLock = myLock;
@@ -25,17 +26,20 @@ public class Replenishment implements Runnable{
 
     @Override
     public void run() {
-
         try {
             myLock.lock();
-            System.out.println("Replenishment lock: " + bank.getAccounts()[0].getBalance() + ";");
-            bank.execute(new Transaction(Transaction.Type.CASH_REPLENISHMENT, 5_000, bank.getAccounts()[0], null));
-            System.out.println("Replenishment: CASH_REPLENISHMENT;");
-            moneyAvailable.signalAll();
-            System.out.println("Replenishment signal: " + bank.getAccounts()[0].getBalance() + ";");
-        } finally {
+            System.out.println("Replenishment mode lock: " + bank.getAccounts()[0].getBalance() + ";");
+            if((bank.getAccounts()[0].getBalance() + amount) <= isFull) {
+                bank.execute(new Transaction(Transaction.Type.CASH_REPLENISHMENT, amount, bank.getAccounts()[0], null));
+                System.out.println("Replenishment mode: CASH_REPLENISHMENT;");
+            } else {
+                System.out.println("Replenishment mode is full: " + bank.getAccounts()[0].getBalance() + ";");
+            }
+            moneyAvailable.signal();
+            System.out.println("Replenishment mode signal: " + bank.getAccounts()[0].getBalance() + ";");
+        }finally {
             myLock.unlock();
-            System.out.println("Replenishment unlock: " + bank.getAccounts()[0].getBalance() + ";\n");
+            System.out.println("Replenishment mode unlock: " + bank.getAccounts()[0].getBalance() + ";\n");
         }
     }
 }

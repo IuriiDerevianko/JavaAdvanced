@@ -15,6 +15,7 @@ public class Withdrawal implements Runnable {
     private Condition moneyAvailable;
     private Bank bank;
     private int amount;
+    private int isEmty = 0;
 
     public Withdrawal(Lock myLock, Condition moneyAvailable, Bank bank, int amount){
         this.myLock = myLock;
@@ -28,18 +29,18 @@ public class Withdrawal implements Runnable {
 
         try {
             myLock.lock();
-            System.out.println("Withdrawal lock: " + bank.getAccounts()[0].getBalance() + ";");
-            while ((bank.getAccounts()[0].getBalance() - amount) < 0) {
-                System.out.println("Withdrawal await: " + bank.getAccounts()[0].getBalance() + ";");
+            System.out.println("Withdrawal mode lock: " + bank.getAccounts()[0].getBalance() + ";");
+            while ((bank.getAccounts()[0].getBalance() - amount) < isEmty) {
+                System.out.println("Withdrawal mode await (WAITING mode): " + bank.getAccounts()[0].getBalance() + ";");
                 moneyAvailable.await();
             }
-            bank.execute(new Transaction(Transaction.Type.CASH_WITHDRAWAL, 10_000, bank.getAccounts()[0], null));
-            System.out.println("Withdrawal: CASH_WITHDRAWAL;" );
+            bank.execute(new Transaction(Transaction.Type.CASH_WITHDRAWAL, amount, bank.getAccounts()[0], null));
+            System.out.println("Withdrawal mode: CASH_WITHDRAWAL;" );
         } catch (Exception e){
 
         } finally {
             myLock.unlock();
-            System.out.println("Withdrawal unlock: " + bank.getAccounts()[0].getBalance() + ";\n");
+            System.out.println("Withdrawal mode unlock: " + bank.getAccounts()[0].getBalance() + ";\n");
         }
     }
 }

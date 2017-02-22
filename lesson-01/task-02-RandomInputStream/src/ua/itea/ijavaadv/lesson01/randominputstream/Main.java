@@ -1,6 +1,17 @@
 //D
 package ua.itea.ijavaadv.lesson01.randominputstream;
 import java.io.IOException;
+
+/**
+ *
+ * 1. RandomInputStream extends InputStream. Реализовать класс по генерации случайных байт в виде байтового потока
+ * длиною не меньше MIN_LENGTH, но не более MAX_LENGTH (это такие константы, значения придумайте сами, размер потока
+ * возвращаемый available(), лежит в этих промежутках).
+ *
+ * 2.* Добавить поддержку markSupported().
+ *
+ */
+
 public class Main {
     public static void main(String[] args) throws IOException {
         RandomInputStream randomInputStream = null;
