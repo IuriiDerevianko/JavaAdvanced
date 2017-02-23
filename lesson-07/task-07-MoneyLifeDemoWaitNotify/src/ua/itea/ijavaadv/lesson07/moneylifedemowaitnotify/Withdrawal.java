@@ -13,23 +13,31 @@ public class Withdrawal implements Runnable {
 
     private Bank bank;
     private int amount;
-    private int isEmty = 0;
+    private int isEmpty;
 
-    public Withdrawal(Bank bank, int amount){
+    public Withdrawal(Bank bank, int amount, int isEmpty){
         this.bank = bank;
         this.amount = amount;
+        this.isEmpty = isEmpty;
     }
 
     @Override
-    public synchronized void run(){
-        System.out.println("Withdrawal mode lock: " + bank.getAccounts()[0].getBalance() + ";");
-        if((bank.getAccounts()[0].getBalance() - amount) < isEmty) {
-            System.out.println("Withdrawal mode await (WAITING mode): " + bank.getAccounts()[0].getBalance() + ";");
-        } else {
-            bank.execute(new Transaction(Transaction.Type.CASH_WITHDRAWAL, amount, bank.getAccounts()[0], null));
-            System.out.println("Withdrawal mode: CASH_WITHDRAWAL;");
+    public void run(){
+        synchronized (bank) {
+            try {
+                System.out.println("Withdrawal mode lock: " + bank.getAccounts()[0].getBalance() + ";");
+                if ((bank.getAccounts()[0].getBalance() - amount) < isEmpty) {
+                    System.out.println("Withdrawal mode await (WAITING mode): " + bank.getAccounts()[0].getBalance() + ";");
+                    bank.wait();
+                } else {
+                    bank.execute(new Transaction(Transaction.Type.CASH_WITHDRAWAL, amount, bank.getAccounts()[0], null));
+                    System.out.println("Withdrawal mode: CASH_WITHDRAWAL;");
+                }
+                System.out.println("Withdrawal mode unlock: " + bank.getAccounts()[0].getBalance() + ";\n");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-        System.out.println("Withdrawal mode unlock: " + bank.getAccounts()[0].getBalance() + ";\n");
     }
 }
 

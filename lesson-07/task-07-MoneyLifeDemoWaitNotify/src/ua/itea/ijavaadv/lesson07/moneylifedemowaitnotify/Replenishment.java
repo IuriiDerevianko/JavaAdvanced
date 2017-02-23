@@ -12,11 +12,12 @@ import ua.itea.ijavaadv.lesson07.bank.Transaction;
 public class Replenishment implements Runnable{
     private Bank bank;
     private int amount;
-    private int isFull = 25_000;
+    private int isFull;
 
-    public Replenishment(Bank bank, int amount){
+    public Replenishment(Bank bank, int amount, int isFull){
         this.bank = bank;
         this.amount = amount;
+        this.isFull = isFull;
     }
 
     @Override
@@ -25,6 +26,7 @@ public class Replenishment implements Runnable{
         if((bank.getAccounts()[0].getBalance() + amount) <= isFull) {
             bank.execute(new Transaction(Transaction.Type.CASH_REPLENISHMENT, amount, bank.getAccounts()[0], null));
             System.out.println("Replenishment mode: CASH_REPLENISHMENT;");
+            notify();
         } else {
             System.out.println("Replenishment mode is full: " + bank.getAccounts()[0].getBalance() + ";");
         }

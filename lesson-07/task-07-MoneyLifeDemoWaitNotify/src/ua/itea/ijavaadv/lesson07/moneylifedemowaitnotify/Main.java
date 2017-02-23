@@ -17,12 +17,11 @@ public class Main {
         Bank bank = Bank.loadMyBank();
         System.out.println("Account balance BEFORE replenishment/withdrawal: " + bank.getAccounts()[0].getBalance() + ";\n");
 
-
-        for (int i = 0; i < 5; i++) {
-            new Thread(new Withdrawal(bank, 5_000)).start();
+        for (int i = 0; i < 4; i++) {
+            new Thread(new Withdrawal(bank, 10_000, 0)).start();
             Thread.sleep(500);
 
-            new Thread(new Replenishment(bank, 10_000)).start();
+            new Thread(new Replenishment(bank, 5_000, 25_000)).start();
             Thread.sleep(500);
         }
     }
