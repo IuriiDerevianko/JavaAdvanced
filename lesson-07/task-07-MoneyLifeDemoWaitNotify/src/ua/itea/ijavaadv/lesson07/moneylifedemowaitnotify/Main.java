@@ -1,3 +1,4 @@
+//D
 package ua.itea.ijavaadv.lesson07.moneylifedemowaitnotify;
 
 import ua.itea.ijavaadv.lesson07.bank.Bank;

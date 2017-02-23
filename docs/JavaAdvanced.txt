@@ -138,3 +138,8 @@ MyTreeSet
 
 5. WaitNotify. Скопировать и модифицировать ранее написанный код использующий условные переменные (Condition of the
 java.util.concurrent package) на способ использующий методы общие для всех Java объектов.
+
+6. ThreadSafeVolatileDoesntHelpDemo. Локализовать и исправить (или написать как исправить Th...DemoFix.txt)
+ошибку в программе VolatileDoesntHelpDemo не применяя что-либо из java.util.concurrent.atomic.
+
+7. Скопировать и модифицировать Bank: запускать обработку транзакций при помощи ExecutorService.
