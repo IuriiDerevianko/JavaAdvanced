@@ -20,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
+        final int N = 6;
         Bank bank = Bank.loadMyBank();
 
         System.out.println(bank.getAccounts()[0].getBalance());  // Account balance BEFORE replenishment;
@@ -32,10 +33,24 @@ public class Main {
                 new Transaction(Transaction.Type.CASH_REPLENISHMENT, 100, bank.getAccounts()[0], null),
         };
 
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.execute(new Thread(new TransactionProcessor(list, bank)));
+        //Один поток выполняет шесть транзакций.
+
+//        ExecutorService executor = Executors.newSingleThreadExecutor();
+//        executor.execute(new Thread(new TransactionProcessor(list, bank)));
+//        executor.shutdown();
+//        executor.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
+
+
+        //Шесть потоков выполняют по одной транзакции.
+
+        ExecutorService executor = Executors.newFixedThreadPool(N);
+        for (int i = 0; i < list.length; i++) {
+            Transaction[] sublist = new Transaction[]{list[i]};
+            executor.execute(new Thread(new TransactionProcessor(sublist, bank)));
+        }
         executor.shutdown();
         executor.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
+
 
         System.out.println(bank.getAccounts()[0].getBalance());   // Account balance AFTER replenishment;
     }
