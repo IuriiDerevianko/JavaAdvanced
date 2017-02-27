@@ -6,6 +6,7 @@ package ua.itea.ijavaadv.lesson09.bilderpattern;
  * on 27.02.17
  * by Iurii Derevianko;
  */
-public enum TypeReport {
+
+enum TypeReport {
     HTML, XML
 }

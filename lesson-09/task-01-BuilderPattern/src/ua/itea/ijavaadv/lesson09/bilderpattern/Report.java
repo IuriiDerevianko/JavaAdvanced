@@ -6,6 +6,16 @@ package ua.itea.ijavaadv.lesson09.bilderpattern;
  * on 27.02.17
  * by Iurii Derevianko;
  */
-public class Report {
-    TypeReport typeReport;
+
+class Report {
+    private TypeReport typeReport;
+
+    void setTypeReport(TypeReport typeReport) {
+        this.typeReport = typeReport;
+    }
+
+    @Override
+    public String toString(){
+        return "Report [TypeReport is: " + typeReport + "];";
+    }
 }

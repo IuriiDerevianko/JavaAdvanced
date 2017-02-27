@@ -6,5 +6,17 @@ package ua.itea.ijavaadv.lesson09.bilderpattern;
  * on 27.02.17
  * by Iurii Derevianko;
  */
-public abstract class ReportBuilder {
+abstract class ReportBuilder {
+
+    Report report;
+
+    void createReport() {
+        report = new Report();
+    }
+
+    abstract void setTypeReport();
+
+    Report getReport() {
+        return report;
+    }
 }

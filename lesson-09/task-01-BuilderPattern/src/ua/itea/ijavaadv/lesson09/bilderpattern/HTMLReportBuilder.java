@@ -7,20 +7,9 @@ package ua.itea.ijavaadv.lesson09.bilderpattern;
  * by Iurii Derevianko;
  */
 
-public class HTMLReportBuilder {
-    private Report report;
+class HTMLReportBuilder extends ReportBuilder {
 
-    public HTMLReportBuilder create() {
-        report = new Report();
-        return this;
-    }
-
-    public HTMLReportBuilder setReportType(TypeReport typeReport) {
-        report.typeReport = typeReport;
-        return this;
-    }
-
-    public Report build() {
-        return report;
+    public void setTypeReport() {
+        report.setTypeReport(TypeReport.HTML);
     }
 }
