@@ -7,6 +7,7 @@ package ua.itea.ijavaadv.lesson10.cw01;
  * by Iurii Derevianko;
  */
 public class Main {
+    @SuppressWarnings("all")
     public static void main(String[] args) {
 
     }
