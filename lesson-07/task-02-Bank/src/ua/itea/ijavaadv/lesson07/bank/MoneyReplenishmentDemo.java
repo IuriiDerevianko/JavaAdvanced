@@ -42,6 +42,5 @@ public class MoneyReplenishmentDemo {
         }
         // Thread.sleep(1000); // it won't help!
         System.out.println(bank.getAccounts()[0].getBalance());   // my account balance AFTER replenishment
-        System.out.println(bank.getAccounts()[0].getBalance());   // my account balance AFTER replenishment
     }
 }
